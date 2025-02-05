@@ -158,12 +158,12 @@
       fill: currentColor;
     }
 
-    /* Hide hint when image is expanded */
+    /* Nascondi il suggerimento quando l'immagine è espansa */
     .modal.show + .image-caption-wrapper {
       display: none;
     }
 
-    /* Supports high-contrast mode */
+    /* Supporto high contrast mode */
     @media (forced-colors: active) {
       .image-interaction-hint {
         border: 1px solid currentColor;
@@ -248,6 +248,11 @@
       right: -50px;
       top: 0px;
     }
+
+    .image-with-expand:hover .side-expand-button {
+  background-color: #f5f5f5;
+}
+
   </style>
 </head>
 <body>
@@ -344,9 +349,9 @@
     <div class="article-container">
       <main class="article-content">
         <p>In 2023, personal transfers outflows from the EU (money sent by EU resident households to non-resident households) reached a record level of €50.9 billion, an 8% increase compared with 2022 (€47.0 billion).</p>
-
+  
         <p>The largest share of these outflows went to Asia (excluding the Near and Middle East), accounting for 21% (€10.7 billion) of the total outflows from the EU, followed very closely by non-EU European countries also with 21% (€10.6 billion) and North Africa with 20% (€9.8 billion).</p>
-
+  
         <p>This information is based on Eurostat data on personal transfers and compensation of employees. The article highlights key findings from the more detailed Statistics Explained article.</p>
         <div class="image-wrapper">
           <div class="image-container">
@@ -364,7 +369,7 @@
                   <path d="M15 3h6v6h-2V5h-4V3zM3 3h6v2H5v4H3V3zm12 18v-2h4v-4h2v6h-6zM3 21v-6h2v4h4v2H3z"/>
                 </svg>
               </button>
-
+  
               <div id="image-modal-3" 
                    class="modal" 
                    role="dialog" 
@@ -384,6 +389,7 @@
       </main>
     </div>
   </div>
+  
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
