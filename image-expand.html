@@ -205,30 +205,31 @@
       }
     }
 
+    /* Stili per l'immagine con pulsante esterno */
     .image-with-expand {
       display: flex;
       align-items: center;
       gap: 1rem;
+      position: relative;
     }
 
     .side-expand-button {
       flex: 0 0 44px;
       width: 44px;
       height: 44px;
-      border: 0px solid black;
+      border: 0;
       border-radius: 10%;
       background: #ffffff;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 0.2s;
+      transition: background-color 0.2s, border 0.2s;
     }
 
     .side-expand-button:hover,
     .side-expand-button:focus {
       background-color: #e7edfa;
-      
     }
 
     .side-expand-button svg {
@@ -244,6 +245,7 @@
       }
     }
 
+    /* Posizionamento assoluto per desktop */
     button.side-expand-button {
       position: absolute;
       right: -50px;
@@ -251,22 +253,41 @@
     }
 
     .image-with-expand:hover .side-expand-button {
-  background-color: #e7edfa;
-  border: 1px solid #262b38;
-}
+      background-color: #e7edfa;
+      border: 1px solid #262b38;
+    }
 
+    /* Ottimizzazione responsive per l'immagine con pulsante esterno */
+    @media (max-width: 768px) {
+      .image-with-expand {
+        display: block;
+      }
+      /* Rimuovo il posizionamento assoluto, in modo che il pulsante si posizioni in flusso */
+      button.side-expand-button {
+        position: relative;
+        right: auto;
+        top: auto;
+        margin-top: 8px;
+        display: block;
+        margin-left: auto;
+        width: 36px;
+        height: 36px;
+      }
+      .side-expand-button svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Primo blocco (immagine senza pulsante esterno) -->
   <div class="container" style="max-width: 1140px;">
     <div class="article-container">
       <main class="article-content">
         <p>In 2023, personal transfers outflows from the EU (money sent by EU resident households to non-resident households) reached a record level of €50.9 billion, an 8% increase compared with 2022 (€47.0 billion).</p>
-
         <p>The largest share of these outflows went to Asia (excluding the Near and Middle East), accounting for 21% (€10.7 billion) of the total outflows from the EU, followed very closely by non-EU European countries also with 21% (€10.6 billion) and North Africa with 20% (€9.8 billion).</p>
-
         <p>This information is based on Eurostat data on personal transfers and compensation of employees. The article highlights key findings from the more detailed Statistics Explained article.</p>
-        <!-- Wrapping the first image content inside un div "image-container" -->
         <div class="image-wrapper">
           <div class="image-container">
             <button type="button" 
@@ -302,13 +323,12 @@
     </div>
   </div>
 
+  <!-- Second blocco (immagine senza pulsante esterno + hint) -->
   <div class="container" style="max-width: 1140px;">
     <div class="article-container">
       <main class="article-content">
         <p>In 2023, personal transfers outflows from the EU (money sent by EU resident households to non-resident households) reached a record level of €50.9 billion, an 8% increase compared with 2022 (€47.0 billion).</p>
-
-        <p>The largest share of these outflows went to Asia (excluding the Near and Middle East), accounting for 21% (€10.7 billion) of the total outflows from the EU, followed very closely by non-EU European countries also with 21% (€10.6 billion) and North Africa with 20% (€9.8 billion).</p>
-
+        <p>The largest share of these outflows went a Asia (excluding the Near and Middle East), accounting for 21% (€10.7 billion) of the total outflows from the EU, followed very closely by non-EU European countries also with 21% (€10.6 billion) and North Africa with 20% (€9.8 billion).</p>
         <p>This information is based on Eurostat data on personal transfers and compensation of employees. The article highlights key findings from the more detailed Statistics Explained article.</p>
         <div class="image-wrapper">
           <div class="image-container">
@@ -347,13 +367,12 @@
     </div>
   </div>
 
+  <!-- Terzo blocco (immagine con pulsante esterno) -->
   <div class="container" style="max-width: 1140px;">
     <div class="article-container">
       <main class="article-content">
         <p>In 2023, personal transfers outflows from the EU (money sent by EU resident households to non-resident households) reached a record level of €50.9 billion, an 8% increase compared with 2022 (€47.0 billion).</p>
-  
         <p>The largest share of these outflows went to Asia (excluding the Near and Middle East), accounting for 21% (€10.7 billion) of the total outflows from the EU, followed very closely by non-EU European countries also with 21% (€10.6 billion) and North Africa with 20% (€9.8 billion).</p>
-  
         <p>This information is based on Eurostat data on personal transfers and compensation of employees. The article highlights key findings from the more detailed Statistics Explained article.</p>
         <div class="image-wrapper">
           <div class="image-container">
