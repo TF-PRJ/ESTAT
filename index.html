@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eurostat | Memory Challenge</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#app-main">Skip to main content</a>
+    <canvas id="confetti-canvas" class="confetti-canvas" aria-hidden="true"></canvas>
+
+    <main id="app-main" class="app" role="main">
+      <section id="intro-screen" class="screen intro-screen" aria-labelledby="intro-title">
+        <img
+          class="intro-logo"
+          src="https://rawcdn.githack.com/TF-PRJ/ESTAT-title-responsiveness/d42c13fae7bd7f85bd8f47b3510bd43c6074d171/Estat-logo-negative.svg"
+          alt="Eurostat logo"
+        />
+        <h1 id="intro-title" tabindex="-1">Memory Challenge</h1>
+        <p class="intro-subtitle">Eurostat Data Visualisation Quiz</p>
+
+        <div class="intro-card">
+          <h2>How to Play</h2>
+          <ol>
+            <li>Study the correct chart for 15 seconds.</li>
+            <li>Answer 8 questions about the incorrect version.</li>
+            <li>Pick 1 of 3 options for each question.</li>
+          </ol>
+        </div>
+
+        <button id="start-game-btn" class="btn btn-xl" type="button">PLAY NOW</button>
+      </section>
+
+      <section id="study-screen" class="screen study-screen" aria-labelledby="study-title" hidden>
+        <header class="study-header">
+          <div>
+            <h2 id="study-title" tabindex="-1">Study the Reference Chart</h2>
+            <p>Memorise the details: title, unit, axis, ordering, source.</p>
+          </div>
+
+          <div class="study-timer-box" aria-live="polite" aria-atomic="true">
+            <p class="timer-label">Time left</p>
+            <p class="timer-value"><span id="study-countdown">15</span><span> s</span></p>
+            <button id="extend-time-btn" class="btn btn-secondary" type="button">+10s</button>
+          </div>
+        </header>
+
+        <article class="chart-stage-card" aria-labelledby="study-chart-title">
+          <h3 id="study-chart-title">Online purchases of e-books or audio books as downloads, 2025</h3>
+          <p class="chart-subtitle">(% of individuals who used internet in the last 3 months)</p>
+          <div class="chart-shell" id="chart-a" aria-label="Correct chart"></div>
+          <img
+            class="chart-logo"
+            src="https://ec.europa.eu/eurostat/cache/visualisations/agriculturefacts/img/estat-logo-horizontal.svg"
+            alt="Eurostat logo"
+          />
+          <p class="chart-source">Source: Eurostat (isoc_ec_ibuy)</p>
+        </article>
+      </section>
+
+      <section id="challenge-screen" class="screen challenge-screen" aria-labelledby="challenge-title" hidden>
+        <header class="challenge-topbar">
+          <div class="topbar-title-wrap">
+            <span class="memory-badge memory-badge-sm" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="memory-icon" focusable="false">
+                <rect x="2.5" y="4" width="9.5" height="13" rx="2.2" />
+                <rect x="12" y="7" width="9.5" height="13" rx="2.2" />
+                <circle cx="7.2" cy="8.6" r="1.1" />
+                <path d="M6.2 14.2h2m-3.3-2.6h4.6m8-1.9h2m-3.4 2.8h4.8m-4.8 2.8h2.7" />
+              </svg>
+            </span>
+            <h2 id="challenge-title">Memory Challenge</h2>
+          </div>
+
+          <div class="topbar-actions">
+            <p class="found-counter" id="found-counter-top">Score 0/8</p>
+            <button
+              id="hint-btn"
+              class="btn btn-secondary"
+              type="button"
+              aria-label="Hint. Using a hint gives zero points for this question."
+            >
+              Hint
+            </button>
+            <button id="reset-btn" class="btn btn-secondary" type="button">Reset</button>
+          </div>
+        </header>
+
+        <div class="challenge-grid">
+          <section class="challenge-main" aria-labelledby="challenge-title">
+            <article id="challenge-chart-card" class="chart-stage-card challenge-card" aria-labelledby="broken-chart-title">
+              <h3 id="broken-chart-title" class="is-hidden-meta"></h3>
+              <p id="broken-subtitle" class="chart-subtitle is-hidden-meta"></p>
+              <div class="chart-shell" id="chart-b" aria-label="Incorrect chart"></div>
+              <img
+                class="chart-logo"
+                src="https://ec.europa.eu/eurostat/cache/visualisations/agriculturefacts/img/estat-logo-horizontal.svg"
+                alt="Eurostat logo"
+              />
+              <p id="broken-source" class="chart-source is-hidden-meta"></p>
+            </article>
+          </section>
+
+          <aside class="challenge-side" aria-labelledby="errors-title">
+            <h3 id="errors-title">Questions (<span id="found-counter-side" aria-live="polite">0/8</span>)</h3>
+            <p id="questions-helper" class="questions-helper">Answer each question to progressively restore the chart.</p>
+            <div class="question-panel">
+              <p class="question-kicker">Current question</p>
+              <p id="challenge-instruction" class="question-text">
+                Read the question and select the best answer.
+              </p>
+            </div>
+            <p id="answer-prompt" class="answer-prompt">Choose one answer.</p>
+            <ul
+              id="errors-list"
+              class="errors-list"
+              role="radiogroup"
+              aria-labelledby="challenge-instruction"
+              aria-describedby="answer-prompt game-status"
+            ></ul>
+            <p id="game-status" class="game-status" role="status" aria-live="polite"></p>
+            <div class="question-actions">
+              <button id="next-question-btn" class="btn btn-next" type="button" disabled aria-disabled="true">
+                Next question
+              </button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="result-screen" class="screen result-screen" aria-labelledby="result-title" hidden>
+        <div class="result-card" role="status" aria-live="polite">
+          <p class="result-emoji" aria-hidden="true">🎉</p>
+          <h2 id="result-title" tabindex="-1">Brilliant!</h2>
+          <p id="result-score" class="result-score">Score 8/8</p>
+          <p id="result-meta" class="result-meta">Mistakes: 0</p>
+          <button id="replay-btn" class="btn btn-xl" type="button">Replay</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
